@@ -40,7 +40,7 @@ async def update_book_by_id(
         book_id: int, 
         book: BookCreate = Body(), 
         session: AsyncIterator[AsyncSession] = Depends(get_db)
-    ) -> BookResponse | dict:
+    ) -> BookResponse:
     query = update(BookDB).where(BookDB.id == book_id) # 
     query = query.values(**book.model_dump(exclude_none=True))
     result = await session.execute(query) # ChunkIterator
