@@ -1,0 +1,31 @@
+set dotenv-path := "./.env"
+set dotenv-load
+
+
+# Create postgres container
+pg_up:
+    docker compose up -d
+
+# Remove postgres container
+pg_down:
+    docker compose down
+
+# Start postgres db service
+pg_start:
+    docker compose start
+
+# Stop postgres db service
+pg_stop:
+    docker compose stop
+
+# Create bankdb
+createdb:
+    docker compose exec db createdb --username=$DB_USER --owner=$DB_USER booksdb
+
+# Drop bankdb:
+dropdb:
+    docker compose exec db dropdb -U $DB_USER booksdb
+
+# Start server
+server:
+    uvicorn main:app --reload

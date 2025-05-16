@@ -13,6 +13,10 @@ sudo apt install docker.io -y
 ```
 sudo apt install docker-compose-v2
 ``` 
+3. Добавление пользователя в группу `docker`
+```
+sudo usermod -aG docker $USER
+```
 
 
 **Добавить программу `just`**  
