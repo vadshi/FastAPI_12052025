@@ -19,7 +19,7 @@ class Settings(BaseSettings):
         db_name = self.DB_NAME or "books.db"
         check = all((self.DB_USER, self.DB_PASSWORD, self.DB_HOST, self.DB_PORT,self.DB_NAME,self.DB_MODE))
         if check and self.DB_MODE == "POSTGRESQL":
-            database_url = (f'postgresql+psycopg2://'
+            database_url = (f'postgresql+asyncpg://'
                             f'{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}')
         else:
             path = BASE_DIR / f'{db_name}'
