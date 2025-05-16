@@ -26,6 +26,12 @@ createdb:
 dropdb:
     docker compose exec db dropdb -U $DB_USER booksdb
 
+shell:
+    docker compose exec db bash
+
+db_psql:
+    docker compose exec -it db psql -U buser -d booksdb
+
 # Start server
 server:
     uvicorn main:app --reload
