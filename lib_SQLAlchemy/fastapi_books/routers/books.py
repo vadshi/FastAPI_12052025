@@ -34,3 +34,11 @@ async def get_books(book_id: int, session: AsyncIterator[AsyncSession] = Depends
         return book
     raise HTTPException(404, f"Book with={book_id} not found.")
 
+@router.get('/{book_id}')
+async def get_books(book_id: int, session: AsyncIterator[AsyncSession] = Depends(get_db)) -> BookResponse | None:
+    query = select(BookDB).filter_by(id=book_id) # select * from books where id = {book_id}
+    result = await session.execute(query) # ChunkIterator
+    book = result.scalar_one_or_none()
+    if book:
+        return book
+    raise HTTPException(404, f"Book with={book_id} not found.")
